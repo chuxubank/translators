@@ -9,7 +9,7 @@
 	"inRepository": true,
 	"translatorType": 4,
 	"browserSupport": "gcsibv",
-	"lastUpdated": "2021-11-26 07:16:45"
+	"lastUpdated": "2021-11-26 07:35:45"
 }
 
 /*
@@ -86,17 +86,7 @@ function scrape(doc, url) {
 		item.title = doc.querySelector('div.h-title').innerText;
 		item.publicationTitle = doc.querySelector('span.aticle-src').innerText;
 		item.date = doc.querySelector('span.sub-time').innerText;
-		var video = doc.querySelector("video");
-		if (video) {
-			item.attachments = [{
-				url: video.src,
-				title: item.title,
-				mimeType: "video/mp4",
-				snapshot: false
-			}];
-		} else {
-			item.attachments = [];
-		}
+		item.attachments = [];
 		var rows = doc.querySelectorAll("#detail > p");
 		var abstract = "";
 		const reContent = /\d+月\d+日电/g;
