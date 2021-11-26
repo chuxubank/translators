@@ -9,7 +9,7 @@
 	"inRepository": true,
 	"translatorType": 4,
 	"browserSupport": "gcsibv",
-	"lastUpdated": "2021-11-26 07:35:45"
+	"lastUpdated": "2021-11-26 10:26:30"
 }
 
 /*
@@ -83,9 +83,9 @@ function scrape(doc, url) {
 
 	translator.setHandler('itemDone', function (obj, item) {
 		item.section = "Politics";
-		item.title = doc.querySelector('div.h-title').innerText;
-		item.publicationTitle = doc.querySelector('span.aticle-src').innerText;
-		item.date = doc.querySelector('span.sub-time').innerText;
+		item.title = text(doc, "div.h-title");
+		item.publicationTitle = text(doc, "span.aticle-src");
+		item.date = text(doc, "span.sub-time");
 		item.attachments = [];
 		var rows = doc.querySelectorAll("#detail > p");
 		var abstract = "";
@@ -107,3 +107,60 @@ function scrape(doc, url) {
 	});
 }
 
+/** BEGIN TEST CASES **/
+var testCases = [
+	{
+		"type": "web",
+		"url": "http://www.xinhuanet.com/politics/2021-11/16/c_1128069845.htm",
+		"items": [
+			{
+				"itemType": "newspaperArticle",
+				"title": "（受权发布）习近平：关于《中共中央关于党的百年奋斗重大成就和历史经验的决议》的说明",
+				"creators": [],
+				"date": "2021-11-16 17:02:35",
+				"abstractNote": "新华社北京11月16日电",
+				"libraryCatalog": "www.xinhuanet.com",
+				"publicationTitle": "新华网",
+				"section": "Politics",
+				"url": "http://www.xinhuanet.com/politics/2021-11/16/c_1128069845.htm",
+				"attachments": [],
+				"tags": [
+					{
+						"tag": "习近平"
+					},
+					{
+						"tag": "六中全会"
+					}
+				],
+				"notes": [],
+				"seeAlso": []
+			}
+		]
+	},
+	{
+		"type": "web",
+		"url": "http://www.news.cn/politics/leaders/2021-11/24/c_1128096690.htm",
+		"items": [
+			{
+				"itemType": "newspaperArticle",
+				"title": "习近平主持召开中央全面深化改革委员会第二十二次会议",
+				"creators": [],
+				"date": "2021-11-24 19:08:51",
+				"abstractNote": "习近平主持召开中央全面深化改革委员会第二十二次会议强调加快科技体制改革攻坚建设全国统一电力市场体系　建立中小学校党组织领导的校长负责制李克强王沪宁韩正出席　　新华社北京11月24日电 中共中央总书记、国家主席、中央军委主席、中央全面深化改革委员会主任习近平11月24日下午主持召开中央全面深化改革委员会第二十二次会议，审议通过了《科技体制改革三年攻坚方案（2021－2023年）》、《关于加快建设全国统一电力市场体系的指导意见》、《关于建立中小学校党组织领导的校长负责制的意见（试行）》、《关于让文物活起来、扩大中华文化国际影响力的实施意见》、《关于支持中关村国家自主创新示范区开展高水平科技自立自强先行先试改革的若干措施》。",
+				"libraryCatalog": "www.news.cn",
+				"publicationTitle": "新华网",
+				"section": "Politics",
+				"url": "http://www.news.cn/politics/leaders/2021-11/24/c_1128096690.htm",
+				"attachments": [],
+				"tags": [
+					{
+						"tag": "习近平"
+					}
+				],
+				"notes": [],
+				"seeAlso": []
+			}
+		]
+	}
+]
+/** END TEST CASES **/
