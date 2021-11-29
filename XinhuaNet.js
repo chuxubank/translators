@@ -9,7 +9,7 @@
 	"inRepository": true,
 	"translatorType": 4,
 	"browserSupport": "gcsibv",
-	"lastUpdated": "2021-11-26 10:26:30"
+	"lastUpdated": "2021-11-28 23:36:32"
 }
 
 /*
@@ -85,7 +85,9 @@ function scrape(doc, url) {
 		item.section = "Politics";
 		item.title = text(doc, "div.h-title");
 		item.publicationTitle = text(doc, "span.aticle-src");
-		item.date = text(doc, "span.sub-time");
+		var date = text(doc, "span.sub-time");
+		if (!date) date = text(doc, "span.h-time");
+		item.date = date;
 		item.attachments = [];
 		var rows = doc.querySelectorAll("#detail > p");
 		var abstract = "";
@@ -151,6 +153,31 @@ var testCases = [
 				"publicationTitle": "新华网",
 				"section": "Politics",
 				"url": "http://www.news.cn/politics/leaders/2021-11/24/c_1128096690.htm",
+				"attachments": [],
+				"tags": [
+					{
+						"tag": "习近平"
+					}
+				],
+				"notes": [],
+				"seeAlso": []
+			}
+		]
+	},
+	{
+		"type": "web",
+		"url": "http://www.news.cn/politics/leaders/2021-11/03/c_1128026941.htm",
+		"items": [
+			{
+				"itemType": "newspaperArticle",
+				"title": "中共中央国务院隆重举行国家科学技术奖励大会 习近平出席大会并为最高奖获得者等颁奖 李克强讲话 王沪宁出席 韩正主持",
+				"creators": [],
+				"date": "2021-11-03 16:46:12",
+				"abstractNote": "11月3日，2020年度国家科学技术奖励大会在北京人民大会堂隆重举行。会前，党和国家领导人习近平、李克强、王沪宁、韩正等会见获奖代表并同大家合影留念。新华社记者 李学仁 摄　　新华社北京11月3日电 中共中央、国务院3日上午在北京隆重举行国家科学技术奖励大会。习近平、李克强、王沪宁、韩正等党和国家领导人出席大会并为获奖代表颁奖。李克强代表党中央、国务院在大会上讲话。韩正主持大会。",
+				"libraryCatalog": "www.news.cn",
+				"publicationTitle": "新华网",
+				"section": "Politics",
+				"url": "http://www.news.cn/politics/leaders/2021-11/03/c_1128026941.htm",
 				"attachments": [],
 				"tags": [
 					{
