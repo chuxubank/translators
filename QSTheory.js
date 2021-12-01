@@ -9,7 +9,7 @@
 	"inRepository": true,
 	"translatorType": 4,
 	"browserSupport": "gcsibv",
-	"lastUpdated": "2021-11-26 10:16:36"
+	"lastUpdated": "2021-12-01 11:10:32"
 }
 
 /*
@@ -37,9 +37,11 @@
 
 
 function detectWeb(doc, url) {
-	// TODO: adjust the logic here
 	if (url.includes('/dukan/')) {
 		return "magazineArticle";
+	}
+	else if (url.includes('/zhuanqu/')) {
+		return "newspaperArticle"
 	}
 	else if (getSearchResults(doc, true)) {
 		return "multiple";
@@ -95,7 +97,7 @@ function scrape(doc, url) {
 	});
 
 	translator.getTranslatorObject(function (trans) {
-		trans.itemType = "magazineArticle";
+		trans.itemType = detectWeb(doc, url);
 		trans.doWeb(doc, url);
 	});
 }
