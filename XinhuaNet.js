@@ -9,7 +9,7 @@
 	"inRepository": true,
 	"translatorType": 4,
 	"browserSupport": "gcsibv",
-	"lastUpdated": "2021-11-28 23:36:32"
+	"lastUpdated": "2021-12-01 11:39:55"
 }
 
 /*
@@ -83,10 +83,17 @@ function scrape(doc, url) {
 
 	translator.setHandler('itemDone', function (obj, item) {
 		item.section = "Politics";
-		item.title = text(doc, "div.h-title");
+		var title = text(doc, "div.h-title");
+		if (!title) title = text(doc, "span.title");
+		item.title = title;
 		item.publicationTitle = text(doc, "span.aticle-src");
 		var date = text(doc, "span.sub-time");
 		if (!date) date = text(doc, "span.h-time");
+		if (!date) date = text(doc, "span.year > em") + 
+						  '/' + 
+						  text(doc, "span.day") +
+						  ' ' +
+						  text(doc, "span.time");
 		item.date = date;
 		item.attachments = [];
 		var rows = doc.querySelectorAll("#detail > p");
@@ -182,6 +189,30 @@ var testCases = [
 				"tags": [
 					{
 						"tag": "习近平"
+					}
+				],
+				"notes": [],
+				"seeAlso": []
+			}
+		]
+	},
+	{
+		"type": "web",
+		"url": "http://www.xinhuanet.com/politics/2021-11/11/c_1128055386.htm",
+		"items": [
+			{
+				"itemType": "newspaperArticle",
+				"title": "（受权发布）中国共产党第十九届中央委员会第六次全体会议公报",
+				"creators": [],
+				"date": "2021/11/11 18:12:02",
+				"abstractNote": "新华社北京11月11日电",
+				"libraryCatalog": "www.xinhuanet.com",
+				"section": "Politics",
+				"url": "http://www.xinhuanet.com/politics/2021-11/11/c_1128055386.htm",
+				"attachments": [],
+				"tags": [
+					{
+						"tag": "六中全会"
 					}
 				],
 				"notes": [],
