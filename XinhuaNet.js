@@ -1,7 +1,7 @@
 {
 	"translatorID": "8c5be9da-70d4-4629-9d11-92ab3f9cb8ee",
 	"label": "XinhuaNet",
-	"creator": "chuxubank",
+	"creator": "Misaka",
 	"target": "^https?://(www\\.)?(news\\.cn|xinhuanet\\.com)",
 	"minVersion": "3.0",
 	"maxVersion": "",
@@ -9,7 +9,7 @@
 	"inRepository": true,
 	"translatorType": 4,
 	"browserSupport": "gcsibv",
-	"lastUpdated": "2021-12-01 11:39:55"
+	"lastUpdated": "2024-03-23 07:06:04"
 }
 
 /*
@@ -64,18 +64,18 @@ function getSearchResults(doc, checkOnly) {
 	return found ? items : false;
 }
 
-function doWeb(doc, url) {
+async function doWeb(doc, url) {
 	if (detectWeb(doc, url) == "multiple") {
 		Zotero.selectItems(getSearchResults(doc, false), function (items) {
 			if (items) ZU.processDocuments(Object.keys(items), scrape);
 		});
 	}
 	else {
-		scrape(doc, url);
+		await scrape(doc, url);
 	}
 }
 
-function scrape(doc, url) {
+async function scrape(doc, url) {
 	var translator = Zotero.loadTranslator('web');
 	// Embedded Metadata
 	translator.setTranslator('951c027d-74ac-47d4-a107-9c3069ab7b48');
@@ -89,8 +89,8 @@ function scrape(doc, url) {
 		item.publicationTitle = text(doc, "span.aticle-src");
 		var date = text(doc, "span.sub-time");
 		if (!date) date = text(doc, "span.h-time");
-		if (!date) date = text(doc, "span.year > em") + 
-						  '/' + 
+		if (!date) date = text(doc, "span.year > em") +
+						  '/' +
 						  text(doc, "span.day") +
 						  ' ' +
 						  text(doc, "span.time");
@@ -213,6 +213,30 @@ var testCases = [
 				"tags": [
 					{
 						"tag": "六中全会"
+					}
+				],
+				"notes": [],
+				"seeAlso": []
+			}
+		]
+	},
+	{
+		"type": "web",
+		"url": "http://www.news.cn/politics/leaders/20240323/04dac3f6f5f744d3bed21b5fc9382d48/c.html",
+		"items": [
+			{
+				"itemType": "newspaperArticle",
+				"title": "习近平就俄罗斯发生严重恐怖袭击事件向俄罗斯总统普京致慰问电",
+				"creators": [],
+				"date": "2024/03/23 13:35:08",
+				"abstractNote": "习近平就俄罗斯发生严重恐怖袭击事件向俄罗斯总统普京致慰问电-3月23日，国家主席习近平就俄罗斯莫斯科州一音乐厅发生严重恐怖袭击事件造成重大人员伤亡向俄罗斯总统普京致慰问电。",
+				"libraryCatalog": "www.news.cn",
+				"section": "Politics",
+				"url": "http://www.news.cn/politics/leaders/20240323/04dac3f6f5f744d3bed21b5fc9382d48/c.html",
+				"attachments": [],
+				"tags": [
+					{
+						"tag": "政治"
 					}
 				],
 				"notes": [],

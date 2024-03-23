@@ -9,7 +9,7 @@
 	"inRepository": true,
 	"translatorType": 4,
 	"browserSupport": "gcsibv",
-	"lastUpdated": "2021-12-01 11:10:32"
+	"lastUpdated": "2024-03-23 06:49:38"
 }
 
 /*
@@ -43,6 +43,9 @@ function detectWeb(doc, url) {
 	else if (url.includes('/zhuanqu/')) {
 		return "newspaperArticle"
 	}
+	else if (url.includes('/yaowen/')) {
+		return "newspaperArticle"
+	}
 	else if (getSearchResults(doc, true)) {
 		return "multiple";
 	}
@@ -67,18 +70,18 @@ function getSearchResults(doc, checkOnly) {
 	return found ? items : false;
 }
 
-function doWeb(doc, url) {
+async function doWeb(doc, url) {
 	if (detectWeb(doc, url) == "multiple") {
 		Zotero.selectItems(getSearchResults(doc, false), function (items) {
 			if (items) ZU.processDocuments(Object.keys(items), scrape);
 		});
 	}
 	else {
-		scrape(doc, url);
+		await scrape(doc, url);
 	}
 }
 
-function scrape(doc, url) {
+async function scrape(doc, url) {
 	var translator = Zotero.loadTranslator('web');
 	// Embedded Metadata
 	translator.setTranslator('951c027d-74ac-47d4-a107-9c3069ab7b48');
@@ -150,6 +153,52 @@ var testCases = [
 				"publicationTitle": "求是网",
 				"url": "http://www.qstheory.cn/dukan/qs/2021-11/15/c_1128063854.htm",
 				"volume": "2021/22",
+				"attachments": [],
+				"tags": [],
+				"notes": [],
+				"seeAlso": []
+			}
+		]
+	},
+	{
+		"type": "web",
+		"url": "http://www.qstheory.cn/zhuanqu/2024-03/16/c_1130090589.htm",
+		"items": [
+			{
+				"itemType": "newspaperArticle",
+				"title": "“六个如何始终”，习近平总书记系统阐释大党独有难题",
+				"creators": [
+					{
+						"lastName": "学而时习工作室",
+						"creatorType": "author",
+						"fieldMode": 1
+					}
+				],
+				"date": "2024-03-16 10:19:46",
+				"language": "zh-cn",
+				"libraryCatalog": "www.qstheory.cn",
+				"publicationTitle": "求是网",
+				"url": "http://www.qstheory.cn/zhuanqu/2024-03/16/c_1130090589.htm",
+				"attachments": [],
+				"tags": [],
+				"notes": [],
+				"seeAlso": []
+			}
+		]
+	},
+	{
+		"type": "web",
+		"url": "http://www.qstheory.cn/yaowen/2024-03/23/c_1130094824.htm",
+		"items": [
+			{
+				"itemType": "newspaperArticle",
+				"title": "习近平就俄罗斯发生严重恐怖袭击事件向俄罗斯总统普京致慰问电",
+				"creators": [],
+				"date": "2024-03-23 14:08:18",
+				"language": "zh-cn",
+				"libraryCatalog": "www.qstheory.cn",
+				"publicationTitle": "求是网",
+				"url": "http://www.qstheory.cn/yaowen/2024-03/23/c_1130094824.htm",
 				"attachments": [],
 				"tags": [],
 				"notes": [],
